@@ -11,8 +11,8 @@ public class N1976 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N=Integer.parseInt(br.readLine());
         int M=Integer.parseInt(br.readLine());
-        UnionFind unionFind = new UnionFind(N);
 
+        UnionFind unionFind = new UnionFind(N);
         for(int i=0;i<N;i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
             for(int j=0;j<N;j++){
