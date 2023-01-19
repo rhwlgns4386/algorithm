@@ -5,29 +5,31 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class N16975 {
+public class N10999 {
     public static void main(String[] args) throws IOException {
         FastReader in = new FastReader();
 
         int N=in.nextInt();
-        int[] A = new int[N];
+        int M=in.nextInt();
+        int K=in.nextInt();
+        long[] A = new long[N];
         for(int i=0;i<N;i++){
-            A[i]=in.nextInt();
+            A[i]=in.nextLong();
         }
 
         SegmentTree st = new SegmentTree(A);
-        int M=in.nextInt();
-        for(int i=0;i<M;i++){
+        for(int i=0;i<M+K;i++){
             int q=in.nextInt();
             if(q==1){
                 int start=in.nextInt()-1;
                 int end=in.nextInt()-1;
-                int k=in.nextInt();
+                long k=in.nextLong();
 
                 st.update(start,end,k);
             }else{
                 int start=in.nextInt()-1;
-                System.out.println(st.rmq(start));;
+                int end=in.nextInt()-1;
+                System.out.println(st.rmq(start,end));;
             }
         }
     }
@@ -35,10 +37,10 @@ public class N16975 {
 
 
     private static class SegmentTree {
-        private int [] A;
+        private long [] A;
         private long[] st,lazy;
         private int n;
-        public SegmentTree(int[] a) {
+        public SegmentTree(long[] a) {
             A=a;
             n=A.length;
             this.st=new long[n*4];
@@ -62,8 +64,8 @@ public class N16975 {
         }
 
 
-        public long rmq(int start) {
-            return rmq(1,0,n-1,start,start);
+        public long rmq(int start,int end) {
+            return rmq(1,0,n-1,start,end);
         }
 
         private long rmq(int p, int L, int R, int i, int j) {
@@ -78,11 +80,11 @@ public class N16975 {
             return p1+p2;
         }
 
-        public void update(int start, int end, int k) {
+        public void update(int start, int end, long k) {
             update(1,0,n-1,start,end,k);
         }
 
-        private long update(int p, int L, int R, int i, int j, int k) {
+        private long update(int p, int L, int R, int i, int j, long k) {
             updateLazy(p,L,R);
             if(j<L || i>R) return st[p];
             if(i<=L &&R<=j){
