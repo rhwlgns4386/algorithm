@@ -1,2 +1,5 @@
-package programmers.kakao2020intenship;public class tem {
+package programmers.kakao2020intenship;
+
+public class tem {
+
 }

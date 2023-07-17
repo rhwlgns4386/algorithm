@@ -8,14 +8,12 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class N11657 {
-    static class Edge{
-        int from;
-        int to;
+    static class Node{
+        int node;
         int cost;
 
-        public Edge(int from, int to, int cost) {
-            this.from = from;
-            this.to = to;
+        public Node(int node, int cost) {
+            this.node = node;
             this.cost = cost;
         }
     }
@@ -27,44 +25,47 @@ public class N11657 {
         int n=Integer.parseInt(stringTokenizer.nextToken());
         int m=Integer.parseInt(stringTokenizer.nextToken());
 
-        ArrayList<Edge> edges = new ArrayList<>();
         long[] dist=new long[n+1];
+        ArrayList<Node>[] a = new ArrayList[n + 1];
 
-        for (int i=1; i<=n; i++) {
-            dist[i] = inf;
+        for(int i=1;i<n+1;i++){
+            a[i]=new ArrayList<>();
         }
 
-        for(int i=0;i<m;i++){
-            stringTokenizer=new StringTokenizer(in.readLine()," ");
-            int from=Integer.parseInt(stringTokenizer.nextToken());
-            int to=Integer.parseInt(stringTokenizer.nextToken());
-            int cost=Integer.parseInt(stringTokenizer.nextToken());
-            edges.add(new Edge(from,to,cost));
+        for(int i=1;i<=m;i++){
+            stringTokenizer=new StringTokenizer(in.readLine());
+            int start=Integer.parseInt(stringTokenizer.nextToken());
+            int end=Integer.parseInt(stringTokenizer.nextToken());
+            int w=Integer.parseInt(stringTokenizer.nextToken());
+            a[start].add(new Node(end,w));
         }
 
-        boolean cycle=false;
+        Arrays.fill(dist,inf);
         dist[1]=0;
-        for (int i = 1; i <= n; i++) {
-            for (Edge edge : edges) {
-                int from = edge.from;
-                int to = edge.to;
-                int cost = edge.cost;
-
-                if(dist[from]!=inf && dist[to]>dist[from]+cost){
-                    dist[to]=dist[from]+cost;
-                    if(i==n){
-                        cycle=true;
+        for(int i=0;i<n-1;i++){
+            for(int j=1;j<n+1;j++){
+                for(Node node:a[j]){
+                    if(dist[j]!=inf){
+                        dist[node.node]=Math.min(dist[node.node],dist[j]+node.cost);
                     }
                 }
             }
         }
 
-        if(cycle){
-            System.out.println(-1);
-        }else{
-            for (int i=2; i<=n; i++) {
-                if (dist[i] == inf) dist[i] = -1;
+        for(int j=1;j<n+1;j++){
+            for(Node node:a[j]){
+                if(dist[j]!=inf&&dist[node.node]>dist[j]+node.cost){
+                    System.out.println(-1);
+                    System.exit(0);
+                }
+            }
+        }
+
+        for(int i=2;i<=n;i++){
+            if(dist[i]!=inf){
                 System.out.println(dist[i]);
+            }else{
+                System.out.println(-1);
             }
         }
     }
