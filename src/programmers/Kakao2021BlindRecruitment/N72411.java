@@ -27,6 +27,7 @@ public class N72411 {
                 }
             }
         }
+
         String ans[] = new String[pq.size()];
         int k = 0;
         while (!pq.isEmpty()) {
