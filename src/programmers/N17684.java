@@ -6,10 +6,14 @@ import java.util.stream.IntStream;
 
 public class N17684 {
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        System.out.println(Arrays.toString(solution.solution("KAKAO")));
-        System.out.println(Arrays.toString(solution.solution("TOBEORNOTTOBEORTOBEORNOT")));
-        System.out.println(Arrays.toString(solution.solution("ABABABABABABABAB")));
+
+        for(int i=(int)(-2.2*100);i<2.2*100;i+=62){
+            System.out.println(i/(double)100);
+        }
+//        Solution solution = new Solution();
+//        System.out.println(Arrays.toString(solution.solution("KAKAO")));
+//        System.out.println(Arrays.toString(solution.solution("TOBEORNOTTOBEORTOBEORNOT")));
+//        System.out.println(Arrays.toString(solution.solution("ABABABABABABABAB")));
     }
 
     static class Solution {

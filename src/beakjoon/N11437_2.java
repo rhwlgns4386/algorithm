@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
-public class N11437 {
-    static int[] E,L,H;
+public class N11437_2 {
+    static int[] E,L,H,tree;
     static int idx=0;
     private static ArrayList<ArrayList<Integer>> a;
 
@@ -36,6 +37,8 @@ public class N11437 {
 
         dfs(1,0);
 
+        tree=new int[getNodeCount(idx)];
+        init(0,idx-1,1);
         int m=Integer.parseInt(in.readLine());
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<m;i++){
@@ -46,11 +49,16 @@ public class N11437 {
             int min=Math.min(H[u],H[v]);
             int max=Math.max(H[u],H[v]);
 
-            sb.append(E[rmq(min,max)]);//E[rmq(H[start],H[end])]
+            sb.append(E[query(0,idx-1,min,max,1)]);//E[rmq(H[start],H[end])]
             sb.append("\n");
         }
 
         System.out.println(sb);
+    }
+
+    private static int getNodeCount(int idx) {
+        int h=(int)Math.ceil(Math.log(idx)/Math.log(2))+1;
+        return (int)Math.pow(2,h)-1;
     }
 
     public static void dfs(int here,int depth){
@@ -67,26 +75,24 @@ public class N11437 {
         }
     }
 
-    public static int rmq(int start,int end){
+    private static int init(int start, int end, int node) {
         if(start==end){
-            return start;
+            return tree[node]=H[E[start]];
         }
 
-        int mid=(start+end)/2;
-        int left=rmq(start,mid);
-        int right=rmq(mid+1,end);
-
-        if(L[left]<=L[right]) return left;
-        return right;
+        int mid = (start+end)/2;
+        return tree[node] = Math.min(init(start, mid, node*2), init(mid+1, end, node*2+1));
     }
 
-    public static int rmqRange(int start,int end){
-        int result=start;
-        for(int j=start;j<=end;j++){
-            if(L[j]<L[result]){
-                result=j;
-            }
+    static int query(int start, int end, int left, int right, int node) {
+        if(right < start || end < left) return Integer.MAX_VALUE;
+        if(left <= start && end <= right) {
+            return tree[node];
         }
-        return result;
+
+        int mid = (start+end) /2;
+
+        return Math.min(query(start, mid, left, right, node*2),
+                query(mid+1, end, left, right, node*2+1));
     }
 }

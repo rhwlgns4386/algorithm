@@ -1,5 +1,7 @@
 package programmers;
 
+import woo.Problem2;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.Arrays;

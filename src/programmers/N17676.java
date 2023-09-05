@@ -32,9 +32,6 @@ public class N17676 {
                 a.add(log);
             }
 
-            a.sort(Comparator.comparingInt(l -> l.startTime));
-            a.sort(Comparator.comparingInt(l -> l.endTime));
-
             int result=0;
             for(int i=0;i<a.size();i++){
                 Log here = a.get(i);

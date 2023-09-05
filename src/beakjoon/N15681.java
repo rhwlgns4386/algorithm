@@ -20,6 +20,7 @@ public class N15681 {
 
         dp=new int[n+1];
         Arrays.fill(dp,-1);
+
         a = new ArrayList<>();
         for(int i=0;i<n+1;i++){
             a.add(new ArrayList<>());
