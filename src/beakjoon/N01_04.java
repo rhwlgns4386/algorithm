@@ -3,6 +3,7 @@ package beakjoon;
 import java.util.Scanner;
 
 public class N01_04 {
+    //test
     public static void main(String[] args){
         Scanner in=new Scanner(System.in);
         int input1 = in.nextInt();
