@@ -14,12 +14,13 @@ public class N1918 {
         Stack<Character> stack = new Stack<>();
         for(int i=0;i<infix.length();i++){
             Character here = infix.charAt(i);
+
             switch (here){
                 case '+':
                 case '-':
                 case '*':
                 case '/':
-                    while (!stack.isEmpty()&&findOrder(stack.peek())>=findOrder(here)){
+                    while (!stack.isEmpty() && findOrder(stack.peek())>=findOrder(here)){
                         sb.append(stack.pop());
                     }
                     stack.add(here);
