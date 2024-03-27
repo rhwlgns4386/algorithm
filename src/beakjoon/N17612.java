@@ -3,6 +3,7 @@ package beakjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -51,7 +52,7 @@ public class N17612 {
         System.out.println(result);
     }
 
-    static class Time implements Comparable<Time>{
+    static class Time implements Comparable<Time> {
         int time;
         int table;
 
